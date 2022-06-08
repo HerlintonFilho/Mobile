@@ -11,61 +11,88 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   TextEditingController mat = TextEditingController();
   TextEditingController password = TextEditingController();
+  final formkey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue,
-      body: Padding(
-        padding: EdgeInsets.all(10),
-        child: Center(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              TextFormField(
-                controller: mat,
-                maxLength: 5,
-                autofocus: true,
-                keyboardType: TextInputType.number,
-                style: new TextStyle(color: Colors.white),
-                decoration: InputDecoration(
-                  labelText: "MATRICULA",
-                  labelStyle: TextStyle(color: Colors.white),
-                ),
-              ),
-              Divider(),
-              TextFormField(
-                controller: password,
-                autofocus: true,
-                obscureText: true,
-                keyboardType: TextInputType.number,
-                style: new TextStyle(color: Colors.white),
-                decoration: InputDecoration(
-                  labelText: "SENHA",
-                  labelStyle: TextStyle(color: Colors.white),
-                ),
-              ),
-              Divider(),
-              RawMaterialButton(
-                  child: Text(
-                    "Login",
-                    style: TextStyle(color: Colors.white),
+        appBar: AppBar(title: Text("App teste")),
+        backgroundColor: Colors.lightBlue,
+        body: Form(
+          key: formkey,
+          child: Padding(
+            padding: EdgeInsets.all(10),
+            child: Center(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  TextFormField(
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Informe sua matricula';
+                      }
+                      return null;
+                    },
+                    controller: mat,
+                    maxLength: 5,
+                    autofocus: true,
+                    keyboardType: TextInputType.number,
+                    style: new TextStyle(color: Colors.black),
+                    decoration: InputDecoration(
+                      labelText: "MATRICULA",
+                      labelStyle: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white),
+                    ),
                   ),
-                  fillColor: Colors.orange,
-                  onPressed: () {
-                    print("${mat.text} //// ${password.text.toString()}");
-                    Navigator.push(
-                        context,
-                        PageRouteBuilder(
-                            pageBuilder: (_, __, ___) => Index(
-                                  matricula: mat.text,
-                                  senha: password.text.toString(),
-                                )));
-                  })
-            ],
+                  TextFormField(
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Informe sua senha';
+                      }
+                      return null;
+                    },
+                    controller: password,
+                    autofocus: true,
+                    obscureText: true,
+                    keyboardType: TextInputType.number,
+                    style: new TextStyle(color: Colors.black),
+                    decoration: InputDecoration(
+                      labelText: "SENHA",
+                      labelStyle: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  Divider(),
+                  RawMaterialButton(
+                      child: Text(
+                        "Login",
+                        style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
+                      ),
+                      fillColor: Colors.orange,
+                      onPressed: () {
+                        if (formkey.currentState!.validate()) {
+                          print('Estou aqui');
+                          print("${mat.text} //// ${password.text.toString()}");
+                          Navigator.pushReplacement(
+                              context,
+                              PageRouteBuilder(
+                                  pageBuilder: (_, __, ___) => Index(
+                                        matricula: mat.text,
+                                        senha: password.text.toString(),
+                                      )));
+                        }
+                      })
+                ],
+              ),
+            ),
           ),
-        ),
-      ),
-    );
+        ));
   }
 }

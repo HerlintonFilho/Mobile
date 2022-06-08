@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:new_project/login.dart';
 
 class Index extends StatefulWidget {
   String matricula;
@@ -14,9 +15,19 @@ class _indexState extends State<Index> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar:
-            AppBar(title: Text("Retornando Matrícula: ${widget.matricula}")),
-        backgroundColor: Colors.blue,
+        appBar: AppBar(
+          title: Text("Retornando Matrícula: ${widget.matricula}"),
+          actions: [
+            IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                  Navigator.push(context,
+                      PageRouteBuilder(pageBuilder: (_, __, ___) => Login()));
+                },
+                icon: Icon(Icons.logout))
+          ],
+        ),
+        backgroundColor: Colors.white,
         body: Padding(
           padding: EdgeInsets.all(10),
           child: Column(
@@ -26,7 +37,7 @@ class _indexState extends State<Index> {
                 Center(
                   child: Text("Matricula: ${widget.matricula}",
                       style: TextStyle(
-                          color: Colors.white,
+                          color: Colors.black,
                           fontSize: 25,
                           fontFamily: 'Arial',
                           fontWeight: FontWeight.bold)),
@@ -34,7 +45,7 @@ class _indexState extends State<Index> {
                 Center(
                   child: Text("Senha: ${widget.senha}",
                       style: TextStyle(
-                          color: Colors.white,
+                          color: Colors.black,
                           fontSize: 20,
                           fontFamily: 'Arial',
                           fontWeight: FontWeight.bold)),
