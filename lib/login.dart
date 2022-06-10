@@ -10,7 +10,7 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   TextEditingController mat = TextEditingController();
-  TextEditingController password = TextEditingController();
+  TextEditingController user = TextEditingController();
   final formkey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -49,17 +49,16 @@ class _LoginState extends State<Login> {
                   TextFormField(
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return 'Informe sua senha';
+                        return 'Informe seu usuário';
                       }
                       return null;
                     },
-                    controller: password,
+                    controller: user,
                     autofocus: true,
-                    obscureText: true,
-                    keyboardType: TextInputType.number,
+                    keyboardType: TextInputType.text,
                     style: new TextStyle(color: Colors.black),
                     decoration: InputDecoration(
-                      labelText: "SENHA",
+                      labelText: "USUÁRIO",
                       labelStyle: TextStyle(
                           color: Colors.white,
                           fontSize: 20,
@@ -79,13 +78,13 @@ class _LoginState extends State<Login> {
                       onPressed: () {
                         if (formkey.currentState!.validate()) {
                           print('Estou aqui');
-                          print("${mat.text} //// ${password.text.toString()}");
+                          print("${mat.text} //// ${user.text}");
                           Navigator.pushReplacement(
                               context,
                               PageRouteBuilder(
                                   pageBuilder: (_, __, ___) => Index(
                                         matricula: mat.text,
-                                        senha: password.text.toString(),
+                                        usuario: user.text,
                                       )));
                         }
                       })

@@ -3,8 +3,8 @@ import 'package:new_project/login.dart';
 
 class Index extends StatefulWidget {
   String matricula;
-  String senha;
-  Index({Key? key, required this.matricula, required this.senha})
+  String usuario;
+  Index({Key? key, required this.matricula, required this.usuario})
       : super(key: key);
 
   @override
@@ -29,28 +29,31 @@ class _indexState extends State<Index> {
         ),
         backgroundColor: Colors.white,
         body: Padding(
-          padding: EdgeInsets.all(10),
-          child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Center(
-                  child: Text("Matricula: ${widget.matricula}",
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 25,
-                          fontFamily: 'Arial',
-                          fontWeight: FontWeight.bold)),
-                ),
-                Center(
-                  child: Text("Senha: ${widget.senha}",
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 20,
-                          fontFamily: 'Arial',
-                          fontWeight: FontWeight.bold)),
-                )
-              ]),
-        ));
+            padding: EdgeInsets.all(10),
+            child: Center(
+              child: Card(
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Center(
+                        child: Text("Matricula: ${widget.matricula}",
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 25,
+                                fontFamily: 'Arial',
+                                fontWeight: FontWeight.bold)),
+                      ),
+                      Center(
+                        child: Text("Usuário: ${widget.usuario}",
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 20,
+                                fontFamily: 'Arial',
+                                fontWeight: FontWeight.bold)),
+                      )
+                    ]),
+              ),
+            )));
   }
 }
